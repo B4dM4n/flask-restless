@@ -816,6 +816,8 @@ class API(ModelView):
             results_per_page = int(request.args.get('results_per_page'))
         except:
             results_per_page = self.results_per_page
+        if self.max_results_per_page <= 0:
+            return max(results_per_page, 0)
         if results_per_page <= 0:
             results_per_page = self.results_per_page
         return min(results_per_page, self.max_results_per_page)
